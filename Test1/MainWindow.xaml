@@ -1,0 +1,205 @@
+﻿<Window
+    x:Class="Test1.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dpi="clr-namespace:DpiUtil;assembly=DpiUtil"
+    xmlns:local="clr-namespace:Test1"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="DpiUtil 示例窗口"
+    Width="960"
+    Height="540"
+    mc:Ignorable="d">
+    <Window.Resources>
+        <ResourceDictionary>
+            <dpi:WindowScaleConverter x:Key="WindowScaleConverter" />
+            <dpi:DpiScaleConverter x:Key="DpiScaleConverter" />
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid x:Name="gdMain" Background="#f0f0f0">
+        <Grid
+            VerticalAlignment="Top"
+            dpi:DpiScaleBehavior.ResponsiveHeight="50"
+            Background="#2c3e50">
+            <StackPanel
+                VerticalAlignment="Center"
+                dpi:DpiScaleBehavior.ResponsiveMargin="20,0"
+                Orientation="Horizontal">
+                <TextBlock
+                    dpi:DpiScaleBehavior.ResponsiveFontSize="18"
+                    FontWeight="Bold"
+                    Foreground="White"
+                    Text="DpiUtil 响应式布局示例" />
+                <TextBlock
+                    x:Name="DpiInfoText"
+                    dpi:DpiScaleBehavior.ResponsiveFontSize="14"
+                    dpi:DpiScaleBehavior.ResponsiveMargin="20,0,0,0"
+                    Foreground="White"
+                    Text="DPI信息：" />
+                <TextBlock
+                    x:Name="WindowSizeInfoText"
+                    Margin="20,0,0,0"
+                    dpi:DpiScaleBehavior.ResponsiveFontSize="14"
+                    Foreground="White"
+                    Text="窗口尺寸：" />
+            </StackPanel>
+        </Grid>
+
+        <StackPanel dpi:DpiScaleBehavior.ResponsiveMargin="20,70,20,20" Orientation="Vertical">
+            <StackPanel dpi:DpiScaleBehavior.ResponsiveMargin="0,0,0,20" Orientation="Horizontal">
+                <Border
+                    dpi:DpiScaleBehavior.ResponsiveHeight="150"
+                    dpi:DpiScaleBehavior.ResponsiveMargin="10,10,10,10"
+                    dpi:DpiScaleBehavior.ResponsiveWidth="300"
+                    Background="#3498db">
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        dpi:DpiScaleBehavior.ResponsiveFontSize="14"
+                        Foreground="White"
+                        Text="响应式尺寸 (300x150)" />
+                </Border>
+
+                <Border
+                    dpi:DpiScaleBehavior.ResponsiveHeight="150"
+                    dpi:DpiScaleBehavior.ResponsiveMargin="10,10,10,10"
+                    dpi:DpiScaleBehavior.ResponsiveWidth="500"
+                    Background="#e74c3c">
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        dpi:DpiScaleBehavior.ResponsiveFontSize="14"
+                        Foreground="White"
+                        Text="响应式尺寸 (500x150)" />
+                </Border>
+            </StackPanel>
+
+            <Border BorderBrush="Red" BorderThickness="1">
+                <Border
+                    dpi:DpiScaleBehavior.ResponsiveCornerRadius="15"
+                    dpi:DpiScaleBehavior.ResponsiveMargin="20,10,20,10"
+                    dpi:DpiScaleBehavior.ResponsivePadding="30"
+                    Background="#2ecc71">
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        dpi:DpiScaleBehavior.ResponsiveFontSize="14"
+                        Foreground="White"
+                        Text="响应式边距 (20,10,20,10)、内边距 (30) 和圆角 (15)" />
+                </Border>
+            </Border>
+
+            <StackPanel
+                HorizontalAlignment="Center"
+                dpi:DpiScaleBehavior.ResponsiveMargin="0,0,0,20"
+                Orientation="Horizontal">
+                <Button
+                    dpi:DpiScaleBehavior.ResponsiveFontSize="14"
+                    dpi:DpiScaleBehavior.ResponsiveHeight="40"
+                    dpi:DpiScaleBehavior.ResponsivePadding="10"
+                    dpi:DpiScaleBehavior.ResponsiveWidth="150"
+                    Background="#9b59b6"
+                    Content="响应式按钮 1"
+                    Foreground="White" />
+                <Button
+                    dpi:DpiScaleBehavior.ResponsiveFontSize="14"
+                    dpi:DpiScaleBehavior.ResponsiveHeight="40"
+                    dpi:DpiScaleBehavior.ResponsiveMargin="20,0,0,0"
+                    dpi:DpiScaleBehavior.ResponsivePadding="10"
+                    dpi:DpiScaleBehavior.ResponsiveWidth="200"
+                    Background="#f39c12"
+                    Content="响应式按钮 2"
+                    Foreground="White" />
+            </StackPanel>
+
+            <StackPanel
+                HorizontalAlignment="Center"
+                dpi:DpiScaleBehavior.ResponsiveMargin="0,0,0,20"
+                Orientation="Vertical">
+                <TextBlock dpi:DpiScaleBehavior.ResponsiveFontSize="12" Text="响应式字体大小 12px" />
+                <TextBlock
+                    dpi:DpiScaleBehavior.ResponsiveFontSize="16"
+                    dpi:DpiScaleBehavior.ResponsiveMargin="0,10,0,0"
+                    Text="响应式字体大小 16px" />
+                <TextBlock
+                    dpi:DpiScaleBehavior.ResponsiveFontSize="20"
+                    dpi:DpiScaleBehavior.ResponsiveMargin="0,10,0,0"
+                    Text="响应式字体大小 20px" />
+                <TextBlock
+                    dpi:DpiScaleBehavior.ResponsiveFontSize="24"
+                    dpi:DpiScaleBehavior.ResponsiveMargin="0,10,0,0"
+                    Text="响应式字体大小 24px" />
+            </StackPanel>
+
+            <Grid dpi:DpiScaleBehavior.ResponsiveMargin="20" Background="#ecf0f1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    dpi:DpiScaleBehavior.ResponsiveFontSize="14"
+                    dpi:DpiScaleBehavior.ResponsivePadding="10"
+                    Background="#3498db"
+                    Foreground="White"
+                    Text="网格单元格 1" />
+                <TextBlock
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    dpi:DpiScaleBehavior.ResponsiveFontSize="14"
+                    dpi:DpiScaleBehavior.ResponsivePadding="10"
+                    Background="#e74c3c"
+                    Foreground="White"
+                    Text="网格单元格 2" />
+                <TextBlock
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    dpi:DpiScaleBehavior.ResponsiveFontSize="14"
+                    dpi:DpiScaleBehavior.ResponsivePadding="10"
+                    Background="#2ecc71"
+                    Foreground="White"
+                    Text="网格单元格 3" />
+                <TextBlock
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    dpi:DpiScaleBehavior.ResponsiveFontSize="14"
+                    dpi:DpiScaleBehavior.ResponsivePadding="10"
+                    Background="#f39c12"
+                    Foreground="White"
+                    Text="网格单元格 4" />
+            </Grid>
+            <Button
+                Width="{Binding ElementName=gdMain, Path=ActualWidth, Converter={StaticResource WindowScaleConverter}, ConverterParameter=0.3}"
+                Height="{Binding ElementName=gdMain, Path=ActualHeight, Converter={StaticResource WindowScaleConverter}, ConverterParameter=0.05}"
+                dpi:DpiScaleBehavior.ResponsiveFontSize="18"
+                dpi:DpiScaleBehavior.ResponsiveMargin="0,10"
+                Content="占目标控件30%宽,5%高的按钮" />
+            <Button
+                Width="{Binding ElementName=gdMain, Path=ActualWidth, Converter={StaticResource WindowScaleConverter}, ConverterParameter=0.5}"
+                Height="{Binding ElementName=gdMain, Path=ActualHeight, Converter={StaticResource WindowScaleConverter}, ConverterParameter=0.07}"
+                dpi:DpiScaleBehavior.ResponsiveFontSize="18"
+                dpi:DpiScaleBehavior.ResponsiveMargin="0,10"
+                Content="占目标控件50%宽,7%高的按钮" />
+            <Button
+                Width="{Binding ElementName=gdMain, Path=ActualWidth, Converter={StaticResource WindowScaleConverter}, ConverterParameter=0.8}"
+                Height="{Binding ElementName=gdMain, Path=ActualHeight, Converter={StaticResource WindowScaleConverter}, ConverterParameter=0.1}"
+                dpi:DpiScaleBehavior.ResponsiveFontSize="18"
+                dpi:DpiScaleBehavior.ResponsiveMargin="0,10"
+                Content="占目标控件80%宽,10%高的按钮" />
+        </StackPanel>
+    </Grid>
+</Window>
