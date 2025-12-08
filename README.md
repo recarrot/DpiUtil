@@ -218,3 +218,7 @@ double scaledValue = WindowScaleManager.Scale(double designValue);
 - 实时 DPI 与窗口尺寸信息展示
 - 不同基准分辨率的适配效果
 - 多种布局元素的响应式实现
+
+## 演示效果
+![screenshot_2025-12-08_15-11-48](https://github.com/user-attachments/assets/db45dfd0-46d1-4feb-9608-d1e80ca85dd4)
+
