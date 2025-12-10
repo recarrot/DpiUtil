@@ -65,9 +65,6 @@ namespace DpiUtil
         {
             if (values.Length >= 2 && values[0] is double windowWidth && values[1] is double windowHeight)
             {
-                // values[0] = 窗口宽度
-                // values[1] = 窗口高度
-                // parameter = "1920,1080" (设计分辨率)
 
                 if (parameter is string designSizeStr)
                 {

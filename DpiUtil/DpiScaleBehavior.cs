@@ -28,7 +28,6 @@ namespace DpiUtil
                 if (WindowScaleManager.IsInitialized)
                     UpdateWidth();
 
-                // 监听缩放比例变化（窗口大小改变时）
                 WindowScaleManager.ScaleChanged += UpdateWidth;
                 element.Unloaded += (s, ev) => WindowScaleManager.ScaleChanged -= UpdateWidth;
             }
@@ -144,11 +143,9 @@ namespace DpiUtil
             {
                 void UpdateCornerRadius()
                 {
-                    // 使用反射设置CornerRadius属性，支持所有具有该属性的控件（如Border、Button等）
                     var cornerRadiusProperty = d.GetType().GetProperty("CornerRadius");
                     if (cornerRadiusProperty != null && cornerRadiusProperty.CanWrite)
                     {
-                        // 对CornerRadius的每个值进行缩放
                         var scaled = new CornerRadius(
                             WindowScaleManager.Scale(cornerRadius.TopLeft),
                             WindowScaleManager.Scale(cornerRadius.TopRight),
