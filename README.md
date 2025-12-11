@@ -142,7 +142,6 @@ this.Loaded += (s, e) =>
 ```xaml
 <Window.Resources>
     <dpi:WindowScaleConverter x:Key="WindowScaleConverter" />
-    <dpi:WindowScaleConverter x:Key="WindowScaleConverter" />
     <dpi:ResponsiveScaler x:Key="ResponsiveScaler" />
     <dpi:DpiWindowScaleConverter x:Key="DpiWindowScaleConverter" />
     <dpi:DpiScaleConverter x:Key="DpiScaleConverter" />
