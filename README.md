@@ -66,7 +66,7 @@ protected override void OnStartup(StartupEventArgs e)
 在窗口的 `Loaded` 事件中进行初始化：
 
 ```csharp
-the.Loaded += (s, e) =>
+this.Loaded += (s, e) =>
 {
     DpiManager.Initialize(this);
     WindowScaleManager.Initialize(this);
@@ -142,6 +142,10 @@ the.Loaded += (s, e) =>
 ```xaml
 <Window.Resources>
     <dpi:WindowScaleConverter x:Key="WindowScaleConverter" />
+    <dpi:WindowScaleConverter x:Key="WindowScaleConverter" />
+    <dpi:ResponsiveScaler x:Key="ResponsiveScaler" />
+    <dpi:DpiWindowScaleConverter x:Key="DpiWindowScaleConverter" />
+    <dpi:DpiScaleConverter x:Key="DpiScaleConverter" />
 </Window.Resources>
 
 <Button
