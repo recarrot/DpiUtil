@@ -16,19 +16,94 @@ namespace DpiUtil
         public static double DpiScaleX => _dpiScaleX;
         public static double DpiScaleY => _dpiScaleY;
 
-        [DllImport("user32.dll", SetLastError = true)] 
+        // Windows 7兼容的DPI感知API
+        [DllImport("user32.dll", SetLastError = true)]
+        private static extern bool SetProcessDPIAware();
+
+        // Windows 8.1+ 的DPI感知API
+        [DllImport("shcore.dll", SetLastError = true)]
+        private static extern int SetProcessDpiAwareness(int value);
+
+        // Windows 10 1703+ 的DPI感知API
+        [DllImport("user32.dll", SetLastError = true)]
         private static extern IntPtr SetProcessDpiAwarenessContext(IntPtr dpiAwarenessContext);
+
+        private enum DPI_AWARENESS
+        {
+            UNAWARE = 0,
+            SYSTEM_AWARE = 1,
+            PER_MONITOR_AWARE = 2
+        }
 
         private static readonly IntPtr DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2 = new IntPtr(-4);
 
-        // 在 App.xaml.cs 的构造函数中最先调用此方法
         public static void EnablePerMonitorV2DpiAwareness()
+        {
+            // 按操作系统版本使用不同的API
+            var osVersion = Environment.OSVersion;
+
+            if (osVersion.Platform == PlatformID.Win32NT)
+            {
+                // Windows 10 1607+ (Build 14393+)
+                if (osVersion.Version.Major == 10 && osVersion.Version.Build >= 14393)
+                {
+                    try
+                    {
+                        // Windows 10 1703+ (Build 15063+)
+                        if (osVersion.Version.Build >= 15063)
+                        {
+                            SetProcessDpiAwarenessContext(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2);
+                        }
+                        // Windows 10 1607
+                        else
+                        {
+                            SetProcessDpiAwareness((int)DPI_AWARENESS.PER_MONITOR_AWARE);
+                        }
+                    }
+                    catch (DllNotFoundException)
+                    {
+                        // API不存在，回退到旧版本
+                        FallbackDpiAwareness();
+                    }
+                    catch (EntryPointNotFoundException)
+                    {
+                        // 函数不存在，回退
+                        FallbackDpiAwareness();
+                    }
+                }
+                // Windows 8.1
+                else if (osVersion.Version.Major == 6 && osVersion.Version.Minor == 3)
+                {
+                    try
+                    {
+                        SetProcessDpiAwareness((int)DPI_AWARENESS.PER_MONITOR_AWARE);
+                    }
+                    catch (DllNotFoundException)
+                    {
+                        // 如果shcore.dll不存在（某些Windows 8.1版本）
+                        SetProcessDPIAware();
+                    }
+                }
+                // Windows 7, Windows 8
+                else
+                {
+                    SetProcessDPIAware(); // 最基本的DPI感知
+                }
+            }
+        }
+
+        private static void FallbackDpiAwareness()
         {
             try
             {
-                SetProcessDpiAwarenessContext(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2);
+                // 尝试Windows 8.1 API
+                SetProcessDpiAwareness((int)DPI_AWARENESS.PER_MONITOR_AWARE);
             }
-            catch { }
+            catch
+            {
+                // 最终回退到Windows Vista/7 API
+                SetProcessDPIAware();
+            }
         }
 
         public static void Initialize(Window window)
@@ -56,5 +131,4 @@ namespace DpiUtil
                 Scale(bottom));
         }
     }
-
 }

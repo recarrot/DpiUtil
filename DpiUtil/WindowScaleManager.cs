@@ -68,12 +68,28 @@ namespace DpiUtil
             }
         }
 
-        public static double ScaleX => _scaleX;
-        public static double ScaleY => _scaleY;
         public static double ScaleFactor => _scale;
         public static bool IsInitialized { get; private set; }
 
         public static event Action ScaleChanged;
+
+        /// <summary>
+        /// 检查事件是否包含指定的委托
+        /// </summary>
+        public static bool ContainsHandler(Action handler)
+        {
+            if (ScaleChanged == null)
+                return false;
+
+            foreach (Action existingHandler in ScaleChanged.GetInvocationList())
+            {
+                if (existingHandler.Method.Equals(handler.Method) && existingHandler.Target == handler.Target)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
 
         /// <summary>
         /// 设置为720P基准分辨率 (1280x720 @ 100%)
@@ -128,14 +144,18 @@ namespace DpiUtil
         /// </summary>
         public static void Initialize(Window window)
         {
+            //Console.WriteLine("[WindowScaleManager] Initializing");
             UpdateScale(window);
             IsInitialized = true;
+            //Console.WriteLine("[WindowScaleManager] Triggering initial ScaleChanged");
             ScaleChanged?.Invoke();
 
             // 监听窗口大小变化
             window.SizeChanged += (s, e) =>
             {
+                //Console.WriteLine("[WindowScaleManager] SizeChanged event");
                 UpdateScale(window);
+                //Console.WriteLine("[WindowScaleManager] Triggering ScaleChanged after size change");
                 ScaleChanged?.Invoke();
             };
         }
@@ -166,10 +186,16 @@ namespace DpiUtil
                 actualHeight = SystemParameters.WorkArea.Height;
             }
 
+            double oldScale = _scale;
             _scaleX = actualWidth / DesignWidth;
             _scaleY = actualHeight / DesignHeight;
 
             _scale = Math.Min(_scaleX, _scaleY);
+
+            if (Math.Abs(oldScale - _scale) > 0.001)
+            {
+                //Console.WriteLine($"[WindowScaleManager] Scale updated: old={oldScale}, new={_scale}, width={actualWidth}, height={actualHeight}");
+            }
         }
 
         /// <summary>
@@ -181,7 +207,7 @@ namespace DpiUtil
         }
 
         /// <summary>
-        /// 缩放 Thickness
+        /// 按X轴缩放单个值
         /// </summary>
         public static Thickness ScaleThickness(Thickness t)
         {
