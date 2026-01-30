@@ -16,6 +16,10 @@ namespace Test1
     {
         protected override void OnStartup(StartupEventArgs e)
         {
+            AppDomain.CurrentDomain.UnhandledException += (sender, args) =>
+            {
+                MessageBox.Show($"发生错误: {args.ExceptionObject}");
+            };
             base.OnStartup(e);
             DpiManager.EnablePerMonitorV2DpiAwareness();
 

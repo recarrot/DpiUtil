@@ -62,7 +62,10 @@ namespace DpiUtil
                     UpdateWidth();
                 }
 
+<<<<<<< HEAD
                 // Console.WriteLine($"[DpiScaleBehavior] Subscribing to ScaleChanged for {element.GetType().Name}");
+=======
+>>>>>>> b8aa1a2d69f794525111ea2d05e8cd93728ff7f8
                 WindowScaleManager.ScaleChanged += UpdateWidth;
                 element.Loaded += OnLoaded;
                 element.Unloaded += (s, ev) =>
@@ -276,6 +279,7 @@ namespace DpiUtil
                 // Console.WriteLine($"[DpiScaleBehavior] OnResponsiveCornerRadiusChanged for {d.GetType().Name}");
                 void UpdateCornerRadius()
                 {
+<<<<<<< HEAD
                     var scaled = new CornerRadius(
                         WindowScaleManager.Scale(cornerRadius.TopLeft),
                         WindowScaleManager.Scale(cornerRadius.TopRight),
@@ -286,6 +290,17 @@ namespace DpiUtil
                     var cornerRadiusProperty = d.GetType().GetProperty("CornerRadius");
                     if (cornerRadiusProperty != null && cornerRadiusProperty.CanWrite)
                     {
+=======
+                    var cornerRadiusProperty = d.GetType().GetProperty("CornerRadius");
+                    if (cornerRadiusProperty != null && cornerRadiusProperty.CanWrite)
+                    {
+                        var scaled = new CornerRadius(
+                            WindowScaleManager.Scale(cornerRadius.TopLeft),
+                            WindowScaleManager.Scale(cornerRadius.TopRight),
+                            WindowScaleManager.Scale(cornerRadius.BottomRight),
+                            WindowScaleManager.Scale(cornerRadius.BottomLeft)
+                        );
+>>>>>>> b8aa1a2d69f794525111ea2d05e8cd93728ff7f8
                         cornerRadiusProperty.SetValue(d, scaled);
                     }
                 }
