@@ -1,0 +1,6 @@
+D:\Develop\Csharp\DpiUtil\DpiUtil\bin\Release\DpiUtil.dll
+D:\Develop\Csharp\DpiUtil\DpiUtil\bin\Release\DpiUtil.pdb
+D:\Develop\Csharp\DpiUtil\DpiUtil\obj\Release\DpiUtil.csproj.AssemblyReference.cache
+D:\Develop\Csharp\DpiUtil\DpiUtil\obj\Release\DpiUtil.csproj.CoreCompileInputs.cache
+D:\Develop\Csharp\DpiUtil\DpiUtil\obj\Release\DpiUtil.dll
+D:\Develop\Csharp\DpiUtil\DpiUtil\obj\Release\DpiUtil.pdb

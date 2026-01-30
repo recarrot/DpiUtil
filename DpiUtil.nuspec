@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>Util.DpiUtil</id>
+    <version>1.0.2</version>
+    <authors>文峰桥南</authors>
+    <description>专为 WPF 应用程序开发的 DPI 感知与响应式布局库</description>
+    <releaseNotes>First release</releaseNotes>
+    <copyright>Copyright 2025</copyright>
+    <tags>wpf dpi scaling</tags>
+    <dependencies>
+      <group targetFramework=".NETFramework4.5" />
+    </dependencies>
+	<projectUrl>https://github.com/recarrot/DpiUtil</projectUrl>
+<repository type="git" url="https://github.com/recarrot/DpiUtil.git" />
+<license type="expression">MIT</license>
+  </metadata>
+<files>
+  <file src="DpiUtil\bin\Release\DpiUtil.dll" target="lib\net45\" />
+  <file src="DpiUtil\bin\Release\DpiUtil.pdb" target="lib\net45\" />
+</files>
+</package>
